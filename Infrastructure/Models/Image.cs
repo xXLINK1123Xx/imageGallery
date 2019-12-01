@@ -25,5 +25,6 @@ namespace Infrastructure.Models
         public string Copyright { get; set; }
         
         public string[] Characters { get; set; }
+        
     }
 }

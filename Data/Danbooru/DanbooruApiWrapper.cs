@@ -68,7 +68,7 @@ namespace Data.Danbooru
             var image = new Image
             {
                 Id = json["id"].Value<int>(),
-                FileUrl = json["file_url"].Value<string>()
+                FileUrl = json.SelectToken("preview_file_url")?.Value<string>()
             };
             
             return image;

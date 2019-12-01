@@ -1,0 +1,13 @@
+.image-preview {
+ &__container {
+   display:inline-flex;
+   flex-direction: column;
+   align-items: center;
+   max-width: 120px;
+   height: auto;
+
+   & img {
+     width: 100%;
+   }
+ }
+}

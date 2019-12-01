@@ -5,7 +5,15 @@
     </div>
     <div class="col-9">
       <!--image table-->
-      <!--<image-preview (ngFor)="let image in images"></image-preview>-->
+      <div>
+        <image-preview *ngFor="let image of images" [image]="image"></image-preview>
+      </div>
+      <div>
+        <button (click)="prevPage()">prev page</button>
+        <span>{{page}}</span>
+        <button (click)="nextPage()">next page</button>
+      </div>
+
     </div>
   </div>
 </div>

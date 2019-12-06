@@ -1,3 +1,11 @@
-
+.main-page {
+  padding-bottom: 30px;
+}
+.main-page__image-container {
+  margin-bottom: 10px;
+}
+.main-page__navigation {
+  text-align: center;
+}
 
 /*# sourceMappingURL=home.css.map */

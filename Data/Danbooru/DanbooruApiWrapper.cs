@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Data.Danbooru
         private readonly string _apiKey;
         private readonly string _apiLogin;
 
-        public DanbooruApiWrapper(IConfiguration config)
+        public DanbooruApiWrapper(IConfiguration config, IDataProvider<Post> dataProvider)
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(config["danbooruHost"]);
@@ -26,7 +27,7 @@ namespace Data.Danbooru
             _apiLogin = config["username"];
         }
 
-        public async Task<List<Image>> GetImages(int page = 1, Tag[] tags = null)
+        public async Task<List<Post>> GetPosts(int page = 1, Tag[] tags = null)
         {
             var query = new StringBuilder("/posts.json?");
             
@@ -56,20 +57,36 @@ namespace Data.Danbooru
             throw new NotImplementedException();
         }
 
-        public async Task<Image> GetImage(int id)
+        public async Task<string> GetImage(Post post)
         {
-            throw new NotImplementedException();
-        }
+            
+            var dir = Path.Combine(Directory.GetCurrentDirectory(), 
+                @"App_Data\images", $"{post.Id}.{post.FileExt}");
 
-        private Image ParseJson(JToken json)
+            var resp = await _httpClient.GetAsync(post.FileUrl);
+            var bytes = await resp.Content.ReadAsByteArrayAsync();
+            var memory = new MemoryStream(bytes);
+            await using (var stream = new FileStream(dir, FileMode.Create))
+            {
+                await memory.CopyToAsync(stream);
+            }
+            memory.Position = 0;
+
+            return $"Data/images/{post.Id}.{post.FileExt}";
+        }
+        
+        
+
+        private Post ParseJson(JToken json)
         {
             var id = json["id"].Value<int>();
             //var fileUrl = json["file_url"].Value<string>();
-            var image = new Image
+            var image = new Post
             {
                 Id = json["id"].Value<int>(),
                 FileUrl = json.SelectToken("large_file_url")?.Value<string>(),
                 PreviewFileUrl = json.SelectToken("preview_file_url")?.Value<string>(),
+                FileExt = json.SelectToken("file_ext")?.Value<string>()
             };
             
             return image;

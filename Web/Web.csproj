@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
@@ -14,12 +14,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\.idea\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\.idea\**" />
+    <EmbeddedResource Remove="ClientApp\.idea\**" />
     <Content Include="ClientApp\src\app\app.component.html" />
     <Content Include="ClientApp\src\app\app.component.ts" />
     <Content Include="ClientApp\src\app\app.module.ts" />
@@ -34,8 +37,12 @@
     <Content Include="ClientApp\src\app\image-preview\image-preview.component.ts" />
     <Content Include="ClientApp\src\app\image-preview\image-preview.css" />
     <Content Include="ClientApp\src\app\image-preview\image-preview.scss" />
-    <Content Include="ClientApp\src\app\models\Image.ts" />
-    <Content Include="ClientApp\src\app\models\Tag.ts" />
+    <Content Include="ClientApp\src\app\image-viewer\image-viewer.component.html" />
+    <Content Include="ClientApp\src\app\image-viewer\image-viewer.css" />
+    <Content Include="ClientApp\src\app\image-viewer\image-viewer.css.map" />
+    <Content Include="ClientApp\src\app\image-viewer\image-viewer.scss" />
+    <Content Include="ClientApp\src\app\models\post.model.ts" />
+    <Content Include="ClientApp\src\app\models\tag.model.ts" />
     <Content Include="ClientApp\src\app\nav-menu\nav-menu.component.css" />
     <Content Include="ClientApp\src\app\nav-menu\nav-menu.component.html" />
     <Content Include="ClientApp\src\app\nav-menu\nav-menu.component.ts" />
@@ -58,7 +65,19 @@
     <Content Include="ClientApp\src\tsconfig.spec.json" />
     <Content Include="ClientApp\src\tslint.json" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\.idea\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\.idea\ClientApp.iml" />
+    <None Remove="ClientApp\.idea\codeStyles\codeStyleConfig.xml" />
+    <None Remove="ClientApp\.idea\codeStyles\Project.xml" />
+    <None Remove="ClientApp\.idea\inspectionProfiles\Project_Default.xml" />
+    <None Remove="ClientApp\.idea\misc.xml" />
+    <None Remove="ClientApp\.idea\modules.xml" />
+    <None Remove="ClientApp\.idea\vcs.xml" />
+    <None Remove="ClientApp\.idea\workspace.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,7 +86,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\image-viewer\image-viewer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\images-service.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App_Data" />
+    <Folder Include="wwwroot\images" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

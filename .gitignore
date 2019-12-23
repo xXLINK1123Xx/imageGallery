@@ -231,3 +231,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+Web/App_Data/images/

@@ -2,7 +2,7 @@ using System;
 
 namespace Infrastructure.Models
 {
-    public class Image
+    public class Post
     {
         public int Id { get; set; }
         
@@ -17,6 +17,8 @@ namespace Infrastructure.Models
         public string PreviewFileUrl { get; set; } //using sample file url here
         
         public string FileUrl { get; set; }
+        
+        public string FileExt { get; set; } 
         
         public string SourceFileUrl { get; set; }
         

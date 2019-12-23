@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Tag} from "../models/Tag";
+import {Tag} from "../models/tag.model";
 import {range} from "rxjs";
 
 @Component({

@@ -9,8 +9,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import {TagMenuComponent} from "./tag-menu/tag-menu.component";
-import {ImagesService} from "./services/images-service.service";
+import {PostsService} from "./services/images-service.service";
 import {ImagePreviewComponent} from "./image-preview/image-preview.component";
+import {ImageViewerComponent} from "./image-viewer/image-viewer.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {ImagePreviewComponent} from "./image-preview/image-preview.component";
     HomeComponent,
     TagMenuComponent,
     FetchDataComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    ImageViewerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,10 +30,11 @@ import {ImagePreviewComponent} from "./image-preview/image-preview.component";
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'fetch-data', component: FetchDataComponent },
+      {path: 'posts/:postId', component: ImageViewerComponent },
     ])
   ],
   providers: [
-    ImagesService
+    PostsService
   ],
   bootstrap: [AppComponent]
 })

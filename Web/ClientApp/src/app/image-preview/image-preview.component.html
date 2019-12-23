@@ -1,3 +1,5 @@
 <div class="image-preview image-preview__container">
-  <img src="{{image.previewFileUrl}}"/>
+  <a [routerLink]="['posts/', image.id]">
+    <img src="{{image.previewFileUrl}}"/>
+  </a>
 </div>

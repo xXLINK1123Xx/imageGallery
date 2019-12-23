@@ -1,10 +1,16 @@
+using System.IO;
 using Data.Danbooru;
+using Data.Data;
+using Infrastructure.Models;
+using Infrastructure.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace Web
@@ -22,7 +28,7 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddCors(options => options.AddPolicy("AllowOrigin", builder => builder.WithOrigins("https://danbooru.donmai.us").AllowAnyMethod().AllowAnyHeader()));
+            services.AddCors(options => options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
             //services.AddMvc();
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -33,6 +39,7 @@ namespace Web
 
 
             services.AddSingleton<DanbooruApiWrapper, DanbooruApiWrapper>();
+            services.AddSingleton<IDataProvider<Post>, PostProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +60,25 @@ namespace Web
             {
                 app.UseSpaStaticFiles();
             }
+            
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "App_Data")),
+                RequestPath = "/Data",
+            });
 
+            var cachePeriod = env.IsDevelopment() ? "600" : "604800";
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    // Requires the following import:
+                    // using Microsoft.AspNetCore.Http;
+                    ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}");
+                }
+            });
+            
             app.UseRouting();
 
             app.UseCors("AllowOrigin"); //This needs to set everything allowed

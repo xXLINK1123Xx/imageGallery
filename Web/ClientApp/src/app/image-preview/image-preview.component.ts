@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ImagesService} from "../services/images-service.service";
-import {Image} from "../models/Image";
+import {PostsService} from "../services/images-service.service";
+import {Post} from "../models/post.model";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -11,15 +11,9 @@ import {HttpClient} from "@angular/common/http";
 export class ImagePreviewComponent{
 
   @Input()
-  public image: Image;
-
-  public kekLol : string;
+  public image: Post;
 
   constructor(private httpClient: HttpClient){
 
-  }
-
-  public getImageData(){
-    this.httpClient.get(this.image.fileUrl).subscribe(data => console.log(data));
   }
 }

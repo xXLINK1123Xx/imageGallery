@@ -6,8 +6,8 @@ namespace Infrastructure.Providers
 {
     public interface IApiProvider
     {
-        Task<List<Image>> GetImages(int page = 1, Tag[] tags = null);
+        Task<List<Post>> GetPosts(int page = 1, Tag[] tags = null);
         Task<List<Tag>> GetTags();
-        Task<Image> GetImage(int id);
+        Task<string> GetImage(Post post);
     }
 }

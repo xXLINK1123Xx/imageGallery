@@ -1,6 +1,7 @@
 using System.IO;
 using Data.Danbooru;
 using Data.Data;
+using Data.ImageProviders;
 using Infrastructure.Models;
 using Infrastructure.Providers;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,7 @@ namespace Web
 
             services.AddSingleton<DanbooruApiWrapper, DanbooruApiWrapper>();
             services.AddSingleton<IDataProvider<Post>, PostProvider>();
+            services.AddSingleton<ImageStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

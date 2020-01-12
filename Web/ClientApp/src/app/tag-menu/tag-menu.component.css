@@ -1,5 +1,10 @@
 .tag-menu {
-  background-color: #0f6674;
+  display: flex;
+  flex-direction: column;
+}
+.tag-menu__tag {
+  display: inline-block;
+  color: #333;
 }
 
 /*# sourceMappingURL=tag-menu.component.css.map */

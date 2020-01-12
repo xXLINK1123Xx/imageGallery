@@ -8,6 +8,5 @@ namespace Infrastructure.Providers
     {
         Task<List<Post>> GetPosts(int page = 1, Tag[] tags = null);
         Task<List<Tag>> GetTags();
-        Task<string> GetImage(Post post);
     }
 }

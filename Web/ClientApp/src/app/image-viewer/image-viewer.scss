@@ -1,3 +1,28 @@
-.asd{
-  color: #0b2e13;
+.image-viewer {
+  margin-bottom: 20%;
+  margin-top: 30px;
+
+  &__image-container {
+
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+
+  &__tags {
+    display: flex;
+    flex-direction: column;
+
+    &-list {
+      padding: 0;
+    }
+
+    &-name {
+      display: inline-block;
+      width: 100%;
+      text-wrap: normal;;
+    }
+  }
 }

@@ -1,5 +1,3 @@
-<div>
-  <ul>
-    <li *ngFor="let tag of tags">{{tag}}</li>
-  </ul>
+<div class="tag-menu">
+    <post-tag *ngFor="let tag of tags" class="tag-menu__tag" [tag]="tag"></post-tag>
 </div>

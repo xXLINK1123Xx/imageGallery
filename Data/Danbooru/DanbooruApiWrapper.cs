@@ -57,26 +57,6 @@ namespace Data.Danbooru
             throw new NotImplementedException();
         }
 
-        public async Task<string> GetImage(Post post)
-        {
-            
-            var dir = Path.Combine(Directory.GetCurrentDirectory(), 
-                @"App_Data\images", $"{post.Id}.{post.FileExt}");
-
-            var resp = await _httpClient.GetAsync(post.FileUrl);
-            var bytes = await resp.Content.ReadAsByteArrayAsync();
-            var memory = new MemoryStream(bytes);
-            await using (var stream = new FileStream(dir, FileMode.Create))
-            {
-                await memory.CopyToAsync(stream);
-            }
-            memory.Position = 0;
-
-            return $"Data/images/{post.Id}.{post.FileExt}";
-        }
-        
-        
-
         private Post ParseJson(JToken json)
         {
             var id = json["id"].Value<int>();
@@ -86,7 +66,17 @@ namespace Data.Danbooru
                 Id = json["id"].Value<int>(),
                 FileUrl = json.SelectToken("large_file_url")?.Value<string>(),
                 PreviewFileUrl = json.SelectToken("preview_file_url")?.Value<string>(),
-                FileExt = json.SelectToken("file_ext")?.Value<string>()
+                FileExt = json.SelectToken("file_ext")?.Value<string>(),
+                Artist = json.SelectToken("tag_string_artist")?.Value<string>(),
+                Tags = json.SelectToken("tag_string_general")?.Value<string>()
+                    .Split(" ")
+                    .Select(tag => 
+                        new Tag
+                        {
+                            Name = tag, 
+                            Type = Tag.TagType.Standard
+                        }).ToArray(),
+                Characters = new[] {json.SelectToken("tag_string_character")?.Value<string>()}
             };
             
             return image;

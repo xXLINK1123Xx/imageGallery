@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-2">
-      <tag-menu></tag-menu>
+    <div class="col-3">
+      <tag-menu [tags]="availableTags"></tag-menu>
     </div>
-    <div class="col-10 main-page">
+    <div class="col-9 main-page">
       <!--image table-->
       <div class="main-page__image-container">
         <image-preview *ngFor="let image of images" [image]="image"></image-preview>

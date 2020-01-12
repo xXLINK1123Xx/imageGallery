@@ -9,9 +9,10 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import {TagMenuComponent} from "./tag-menu/tag-menu.component";
-import {PostsService} from "./services/images-service.service";
+import {PostsService} from "./services/images.service";
 import {ImagePreviewComponent} from "./image-preview/image-preview.component";
 import {ImageViewerComponent} from "./image-viewer/image-viewer.component";
+import {TagComponent} from "./tag/tag.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {ImageViewerComponent} from "./image-viewer/image-viewer.component";
     TagMenuComponent,
     FetchDataComponent,
     ImagePreviewComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    TagComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Data.Danbooru;
+using Data.ImageProviders;
 using Infrastructure.Models;
 using Infrastructure.Providers;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace Web.Controllers
     {
         private readonly DanbooruApiWrapper _danbooruApiWrapper;
         private readonly IDataProvider<Post> _dataProvider;
+        private readonly ImageStorage _imageProvider;
 
-        public PostsController(DanbooruApiWrapper danbooruApiWrapper, IDataProvider<Post> dataProvider)
+        public PostsController(DanbooruApiWrapper danbooruApiWrapper, IDataProvider<Post> dataProvider, ImageStorage imageStorage)
         {
             this._danbooruApiWrapper = danbooruApiWrapper;
             this._dataProvider = dataProvider;
+            this._imageProvider = imageStorage;
         }
 
         [HttpGet]
@@ -37,7 +40,7 @@ namespace Web.Controllers
         public async Task<Post> GetImage(int id)
         {
             var post = _dataProvider.Get(id);
-            post.FileUrl = await _danbooruApiWrapper.GetImage(post);
+            post.FileUrl = await _imageProvider.GetImage(post);
             return post;
         }
     }

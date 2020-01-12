@@ -51,6 +51,9 @@
     <Content Include="ClientApp\src\app\tag-menu\tag-menu.component.html" />
     <Content Include="ClientApp\src\app\tag-menu\tag-menu.component.scss" />
     <Content Include="ClientApp\src\app\tag-menu\tag-menu.component.ts" />
+    <Content Include="ClientApp\src\app\tag\tag.component.css" />
+    <Content Include="ClientApp\src\app\tag\tag.component.html" />
+    <Content Include="ClientApp\src\app\tag\tag.component.scss" />
     <Content Include="ClientApp\src\assets\.gitkeep" />
     <Content Include="ClientApp\src\environments\environment.prod.ts" />
     <Content Include="ClientApp\src\environments\environment.ts" />
@@ -67,6 +70,10 @@
     <None Remove="$(SpaRoot)**" />
     <None Remove="ClientApp\.idea\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <Compile Remove="wwwroot\images\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
+    <None Remove="wwwroot\images\**" />
+    <Content Remove="wwwroot\images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,12 +94,12 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\image-viewer\image-viewer.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\images-service.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\images.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tag\tag.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="App_Data" />
-    <Folder Include="wwwroot\images" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

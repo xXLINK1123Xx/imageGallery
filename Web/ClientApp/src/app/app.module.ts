@@ -32,9 +32,13 @@ import {NgxPaginationModule} from "ngx-pagination";
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'posts/1', pathMatch: 'full' },
+      { path: 'posts', component: HomeComponent },
+      { path: 'posts/:page', component: HomeComponent, data: {
+        page : 1
+        } },
       { path: 'fetch-data', component: FetchDataComponent },
-      {path: 'posts/:postId', component: ImageViewerComponent },
+      {path: 'post-details/:postId', component: ImageViewerComponent },
     ])
   ],
   providers: [

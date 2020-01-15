@@ -5,6 +5,7 @@ import {Tag} from "../models/tag.model";
 import {filter, flatMap, take} from "rxjs/operators";
 import {from} from "rxjs";
 import {Title} from "@angular/platform-browser";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -19,30 +20,37 @@ export class HomeComponent implements OnInit{
   public page: number = 1;
 
   constructor(private imageService: PostsService,
-              private titleService: Title) {}
+              private titleService: Title,
+              private route: ActivatedRoute,
+              private router: Router,) {}
 
 
   public changePage(newPage : number) {
-    this.page = newPage;
-    this.imageService.getPosts(this.page, null).subscribe(data => this.images = data);
+
+    this.router.navigate(['../../posts', newPage],{relativeTo: this.route, skipLocationChange: false})
+      .then(res => this.page = newPage);
   }
 
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
-    this.imageService.getPosts(this.page, null).subscribe(data => {
-      this.images = data;
-      console.log(this.images);
 
+    this.route.paramMap.subscribe(params => {
 
-      from(this.images).pipe(
-        flatMap( img => img.tags),
-        filter(t => t.name !== '' && t.name !== '/\\/\\/\\'),
-        take(20)
-      ).subscribe( t => {
-        if(this.availableTags.indexOf(t) === -1)
-          this.availableTags.push(t);
-        this.availableTags = this.availableTags.sort((a, b) => a.name.localeCompare(b.name));
+      this.page = Number.parseInt(params.get("page")) | this.page;
+      console.log(`page: ${params.get("page")}`);
+
+      this.imageService.getPosts(this.page, null).subscribe(data => {
+        this.images = data;
+        from(this.images).pipe(
+          flatMap( img => img.tags),
+          filter(t => t.name !== '' && t.name !== '/\\/\\/\\'),
+          take(20)
+        ).subscribe( t => {
+          if(this.availableTags.indexOf(t) === -1)
+            this.availableTags.push(t);
+          this.availableTags = this.availableTags.sort((a, b) => a.name.localeCompare(b.name));
+        });
       });
     });
   }

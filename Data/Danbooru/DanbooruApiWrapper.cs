@@ -33,9 +33,9 @@ namespace Data.Danbooru
             
             query.Append($"{_apiLogin}={_apiKey}");
             query.Append($"&page={page}");
+            query.Append("&tags=-animated");
             if (tags != null)
             {
-                query.Append("&tags=");
                 query.AppendJoin("+", tags.AsEnumerable());
             }
 

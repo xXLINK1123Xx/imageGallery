@@ -22,16 +22,11 @@ export class HomeComponent implements OnInit{
               private titleService: Title) {}
 
 
-  public nextPage() {
-    this.imageService.getPosts(++this.page, null).subscribe(data => this.images = data);
-  }
-
-  public prevPage() {
-    if(--this.page < 1) {
-      this.page = 1;
-    }
+  public changePage(newPage : number) {
+    this.page = newPage;
     this.imageService.getPosts(this.page, null).subscribe(data => this.images = data);
   }
+
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);

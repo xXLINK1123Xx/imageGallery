@@ -13,6 +13,7 @@ import {PostsService} from "./services/images.service";
 import {ImagePreviewComponent} from "./image-preview/image-preview.component";
 import {ImageViewerComponent} from "./image-viewer/image-viewer.component";
 import {TagComponent} from "./tag/tag.component";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {TagComponent} from "./tag/tag.component";
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    NgxPaginationModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([

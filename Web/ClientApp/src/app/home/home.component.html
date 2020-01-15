@@ -6,12 +6,11 @@
     <div class="col-9 main-page">
       <!--image table-->
       <div class="main-page__image-container">
-        <image-preview *ngFor="let image of images" [image]="image"></image-preview>
+        <image-preview *ngFor="let image of images | paginate: { itemsPerPage: 20, currentPage: page, totalItems: 20000 }"
+                       [image]="image"></image-preview>
       </div>
       <div class="main-page__navigation">
-        <button (click)="prevPage()">prev page</button>
-        <span>{{page}}</span>
-        <button (click)="nextPage()">next page</button>
+        <pagination-controls (pageChange)="changePage($event)"></pagination-controls>
       </div>
 
     </div>

@@ -21,7 +21,7 @@ namespace Data.ImageProviders {
         public async Task<string> GetImage(Post post)
         {
             var dir = Path.Combine(Directory.GetCurrentDirectory(), 
-                @"App_Data\images");
+                @"App_Data", "images");
 
             var fileList = Directory.GetFiles(dir, $"{post.Id}.{post.FileExt}");
 
@@ -36,7 +36,7 @@ namespace Data.ImageProviders {
         public async Task<string> SaveImage(Post post)
         {
             var dir = Path.Combine(Directory.GetCurrentDirectory(), 
-                @"App_Data\images", $"{post.Id}.{post.FileExt}");
+                @"App_Data", "images", $"{post.Id}.{post.FileExt}");
 
             var resp = await _httpClient.GetAsync(post.FileUrl);
             var bytes = await resp.Content.ReadAsByteArrayAsync();

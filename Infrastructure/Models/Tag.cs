@@ -15,7 +15,7 @@ namespace Infrastructure.Models
 
         public enum TagType
         {
-            Standard,
+            Standard = 1,
             Artist,
             Copyright,
             Character

@@ -1,3 +1,18 @@
-
+.tag {
+  font-size: 18px;
+  font-weight: bold;
+}
+.tag__standard {
+  color: #4cafff;
+}
+.tag__character {
+  color: #ff1e1a;
+}
+.tag__copyright {
+  color: #ff53f3;
+}
+.tag__artist {
+  color: #147f1e;
+}
 
 /*# sourceMappingURL=tag.component.css.map */

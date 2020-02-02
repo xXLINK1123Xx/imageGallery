@@ -1,13 +1,10 @@
 .image-preview__container {
-  display: inline-block;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
-  max-width: 120px;
-  height: auto;
+  width: 154px;
+  height: 154px;
   margin: 20px;
-}
-.image-preview__container img {
-  width: 100%;
 }
 
 /*# sourceMappingURL=image-preview.css.map */

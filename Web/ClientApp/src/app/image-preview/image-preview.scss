@@ -1,14 +1,13 @@
 .image-preview {
  &__container {
-   display: inline-block;
+   display: inline-flex;
    flex-direction: column;
    align-items: center;
-   max-width: 120px;
-   height: auto;
+   width: 154px;
+   height: 154px;
    margin: 20px;
 
    & img {
-     width: 100%;
    }
  }
 }

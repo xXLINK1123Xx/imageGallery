@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {PostsService} from "../services/images.service";
 import {Post} from "../models/post.model";
 import {Tag} from "../models/tag.model";
@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './home.component.html',
   styleUrls: ['./home.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
   public title: string = 'Image Gallery';
   public images: Post[];
@@ -27,9 +27,8 @@ export class HomeComponent implements OnInit{
 
 
   public changePage(newPage : number) {
-    console.log('new page is ' + newPage);
-    this.router.navigate(['../../posts', newPage],{relativeTo: this.route, skipLocationChange: false});
-      //.then(res => this.page = newPage);
+    this.router.navigate(['../../posts', newPage],{relativeTo: this.route, skipLocationChange: false})
+      .then(res => this.page = newPage);
   }
 
 
@@ -38,9 +37,7 @@ export class HomeComponent implements OnInit{
 
     this.route.paramMap.subscribe(params => {
 
-      this.page = Number.parseInt(params.get("page")) || this.page;
-      console.log(`page from param: ${params.get("page")}`);
-      console.log(`page: ${this.page}`);
+      this.page = +params.get("page") || this.page;
       this.availableTags = [];
 
       this.imageService.getPosts(this.page, null).subscribe(data => {

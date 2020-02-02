@@ -16,4 +16,7 @@ export class TagComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewChecked() {
+  }
+
 }

@@ -1,0 +1,22 @@
+.tag {
+
+  font-size: 18px;
+  font-weight: bold;
+
+
+  &__standard {
+    color: #4cafff;
+  }
+
+  &__character {
+    color:#ff1e1a;
+  }
+
+  &__copyright {
+    color: #ff53f3;
+  }
+
+  &__artist {
+    color: #147f1e;
+  }
+}

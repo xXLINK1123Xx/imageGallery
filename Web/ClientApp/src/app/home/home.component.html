@@ -6,7 +6,7 @@
     <div class="col-9 main-page">
       <!--image table-->
       <div class="main-page__image-container">
-        <image-preview *ngFor="let image of images | paginate: { itemsPerPage: 20, currentPage: page, totalItems: 20000 }"
+        <image-preview *ngFor="let image of images | paginate: { itemsPerPage: 20, currentPage: page, totalItems: totalPostCount }"
                        [image]="image"></image-preview>
       </div>
       <div class="main-page__navigation">

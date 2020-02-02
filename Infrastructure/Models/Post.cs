@@ -22,11 +22,11 @@ namespace Infrastructure.Models
         
         public string SourceFileUrl { get; set; }
         
-        public string Artist { get; set; }
+        public Tag Artist { get; set; }
         
-        public string Copyright { get; set; }
+        public Tag Copyright { get; set; }
         
-        public string[] Characters { get; set; }
+        public Tag[] Characters { get; set; }
         
     }
 }

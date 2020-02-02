@@ -42,7 +42,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     ])
   ],
   providers: [
-    PostsService
+    PostsService,
+    {provide: 'TOTAL_POST_COUNT', useValue: 40000}
   ],
   bootstrap: [AppComponent]
 })

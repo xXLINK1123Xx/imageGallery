@@ -6,28 +6,32 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Infrastructure.Models;
 using Infrastructure.Providers;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Data.ImageProviders {
     public class ImageStorage {
         private readonly HttpClient _httpClient;
         private readonly IDataProvider<Post> _postProvider;
-        
-        public ImageStorage(IDataProvider<Post> postProvider)
+        private readonly IWebHostEnvironment _env;
+
+        public ImageStorage(IDataProvider<Post> postProvider, IWebHostEnvironment env)
         {
             _httpClient = new HttpClient();
-            this._postProvider = postProvider;
+            _postProvider = postProvider;
+            _env = env;
         }
 
         public async Task<string> GetImage(Post post)
         {
-            var dir = Path.Combine(Directory.GetCurrentDirectory(), 
-                @"App_Data", "images");
+            var webRoot = _env.WebRootPath;
+            var dir = Path.Combine(webRoot, 
+                "images");
 
             var fileList = Directory.GetFiles(dir, $"{post.Id}.{post.FileExt}");
 
             if (fileList.Length > 0)
             {
-                return $"Data/images/{post.Id}.{post.FileExt}";
+                return $"images/{post.Id}.{post.FileExt}";
             }
 
             return await SaveImage(post);
@@ -35,8 +39,9 @@ namespace Data.ImageProviders {
         
         public async Task<string> SaveImage(Post post)
         {
-            var dir = Path.Combine(Directory.GetCurrentDirectory(), 
-                @"App_Data", "images", $"{post.Id}.{post.FileExt}");
+            
+            var webRoot = _env.WebRootPath;
+            var dir = Path.Combine(webRoot, "images", $"{post.Id}.{post.FileExt}");
 
             var resp = await _httpClient.GetAsync(post.FileUrl);
             var bytes = await resp.Content.ReadAsByteArrayAsync();
@@ -47,7 +52,7 @@ namespace Data.ImageProviders {
             }
             memory.Position = 0;
 
-            return $"Data/images/{post.Id}.{post.FileExt}";
+            return $"images/{post.Id}.{post.FileExt}";
         }
 
         public async Task<HttpResponseMessage> GetImageResponse(int postId)

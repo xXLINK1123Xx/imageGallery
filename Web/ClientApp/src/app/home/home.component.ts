@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {PostsService} from "../services/images.service";
 import {Post} from "../models/post.model";
 import {Tag} from "../models/tag.model";
@@ -22,13 +22,14 @@ export class HomeComponent implements OnInit{
   constructor(private imageService: PostsService,
               private titleService: Title,
               private route: ActivatedRoute,
-              private router: Router,) {}
+              private router: Router,
+              @Inject('TOTAL_POST_COUNT') private totalPostCount: string) {}
 
 
   public changePage(newPage : number) {
-
-    this.router.navigate(['../../posts', newPage],{relativeTo: this.route, skipLocationChange: false})
-      .then(res => this.page = newPage);
+    console.log('new page is ' + newPage);
+    this.router.navigate(['../../posts', newPage],{relativeTo: this.route, skipLocationChange: false});
+      //.then(res => this.page = newPage);
   }
 
 
@@ -37,8 +38,10 @@ export class HomeComponent implements OnInit{
 
     this.route.paramMap.subscribe(params => {
 
-      this.page = Number.parseInt(params.get("page")) | this.page;
-      console.log(`page: ${params.get("page")}`);
+      this.page = Number.parseInt(params.get("page")) || this.page;
+      console.log(`page from param: ${params.get("page")}`);
+      console.log(`page: ${this.page}`);
+      this.availableTags = [];
 
       this.imageService.getPosts(this.page, null).subscribe(data => {
         this.images = data;

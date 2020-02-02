@@ -62,14 +62,16 @@ namespace Web
             {
                 app.UseSpaStaticFiles();
             }
-            
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "App_Data")),
-                RequestPath = "/Data",
-            });
+            //
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(
+            //         Path.Combine(Directory.GetCurrentDirectory(), "App_Data")),
+            //     RequestPath = "/Data",
+            // });
 
+            app.UseStaticFiles();
+            
             var cachePeriod = env.IsDevelopment() ? "600" : "604800";
             app.UseStaticFiles(new StaticFileOptions
             {

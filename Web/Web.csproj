@@ -70,10 +70,6 @@
     <None Remove="$(SpaRoot)**" />
     <None Remove="ClientApp\.idea\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <Compile Remove="wwwroot\images\**" />
-    <EmbeddedResource Remove="wwwroot\images\**" />
-    <None Remove="wwwroot\images\**" />
-    <Content Remove="wwwroot\images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -101,6 +97,7 @@
   <ItemGroup>
     <Folder Include="App_Data" />
     <Folder Include="App_Data\images" />
+    <Folder Include="wwwroot\images" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

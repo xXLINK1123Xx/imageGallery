@@ -39,13 +39,13 @@ export class ImageViewerComponent implements OnInit{
   private setTitle(): void {
     let title = '';
     if(this.post.characters && this.post.characters.length > 0) {
-      title += this.post.characters.join(', ');
+      title += this.post.characters.map<string>(c => c.name).join(', ');
     }
     if(this.post.copyright) {
       title += this.post.copyright.replace('_', ' ');
     }
     if(this.post.artist) {
-      title += ` by ${this.post.artist.replace('_', ' ')}`;
+      title += ` by ${this.post.artist.name.replace('_', ' ')}`;
     }
 
     this.titleService.setTitle(title);

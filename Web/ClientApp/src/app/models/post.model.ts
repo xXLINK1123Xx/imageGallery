@@ -17,10 +17,10 @@ export class Post {
 
   public sourceFileUrl: string;
 
-  public artist: string;
+  public artist: Tag;
 
   public copyright :string;
 
-  public characters: string[];
+  public characters: Tag[];
 
 }

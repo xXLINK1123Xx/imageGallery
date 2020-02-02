@@ -67,7 +67,7 @@ namespace Data.Danbooru
                 FileUrl = json.SelectToken("large_file_url")?.Value<string>(),
                 PreviewFileUrl = json.SelectToken("preview_file_url")?.Value<string>(),
                 FileExt = json.SelectToken("file_ext")?.Value<string>(),
-                Artist = json.SelectToken("tag_string_artist")?.Value<string>(),
+                Artist = new Tag{ Name= json.SelectToken("tag_string_artist")?.Value<string>(), Type = Tag.TagType.Artist},
                 Tags = json.SelectToken("tag_string_general")?.Value<string>()
                     .Split(" ")
                     .Select(tag => 
@@ -76,7 +76,14 @@ namespace Data.Danbooru
                             Name = tag, 
                             Type = Tag.TagType.Standard
                         }).ToArray(),
-                Characters = new[] {json.SelectToken("tag_string_character")?.Value<string>()}
+                Characters = json.SelectToken("tag_count_character").ToObject<int>() > 0 ? json.SelectToken("tag_string_character")?.Value<string>()
+                    .Split(" ")
+                    .Select(tag => 
+                        new Tag
+                        {
+                            Name = tag, 
+                            Type = Tag.TagType.Character
+                        }).ToArray() : null,
             };
             
             return image;

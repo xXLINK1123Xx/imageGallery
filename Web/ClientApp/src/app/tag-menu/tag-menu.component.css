@@ -2,9 +2,33 @@
   display: flex;
   flex-direction: column;
 }
+.tag-menu__separator {
+  width: 100%;
+  border-bottom: solid 1px #c3c3c3;
+}
+.tag-menu__title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 .tag-menu__tag {
   display: inline-block;
   color: #333;
+}
+.tag-menu__general-tag-list {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+.tag-menu__characters-list {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+.tag-menu__artist {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
 }
 
 /*# sourceMappingURL=tag-menu.component.css.map */

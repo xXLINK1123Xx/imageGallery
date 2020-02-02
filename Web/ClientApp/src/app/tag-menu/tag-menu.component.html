@@ -1,3 +1,14 @@
 <div class="tag-menu">
+  <div *ngIf="characters" class="tag-menu__characters-list">
+    <span class="tag-menu__title">Characters</span>
+    <post-tag *ngFor="let tag of characters" class="tag-menu__tag" [tag]="tag"></post-tag>
+  </div>
+  <div *ngIf="artist" class="tag-menu__artist">
+    <span class="tag-menu__title">Asrtist</span>
+    <post-tag [tag]="artist"></post-tag>
+  </div>
+  <div *ngIf="tags && tags.length > 0" class="tag-menu__general-tag-list">
+    <span class="tag-menu__title">Tags</span>
     <post-tag *ngFor="let tag of tags" class="tag-menu__tag" [tag]="tag"></post-tag>
+  </div>
 </div>

@@ -13,7 +13,12 @@ export class TagMenuComponent {
   @Input()
   public tags: Tag[] = [];
 
+  @Input()
+  public characters: Tag[];
+
+  @Input()
+  public artist: Tag;
+
   constructor() {
-   //range(0, 10).subscribe(res => this.tags.push(res));
   }
 }

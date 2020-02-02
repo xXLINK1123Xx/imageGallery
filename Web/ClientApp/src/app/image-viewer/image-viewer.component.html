@@ -1,11 +1,10 @@
 <div class="container image-viewer">
   <div class="row">
     <div class="col-4 image-viewer__tags">
-      <span class="">Tags will be there!</span>
-      <tag-menu *ngIf="post.tags" [tags]="post.tags"></tag-menu>
+      <tag-menu *ngIf="post" [tags]="post.tags" [artist]="post.artist" [characters]="post.characters"></tag-menu>
     </div>
     <div class="col-8 image-viewer__image-container">
-      <img class="image-viewer__image" src="{{post.fileUrl}}" alt="Image should be there"/>
+      <img *ngIf="post" class="image-viewer__image" src="{{post.fileUrl}}" alt="Image should be there"/>
     </div>
   </div>
 </div>

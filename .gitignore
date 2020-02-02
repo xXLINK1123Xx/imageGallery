@@ -218,6 +218,9 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 
+# mono blob files
+*.blob 
+
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
@@ -233,3 +236,4 @@ _Pvt_Extensions
 .fake/
 
 Web/App_Data/images/
+/Web/wwwroot/images/

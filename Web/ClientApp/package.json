@@ -28,7 +28,7 @@
     "jquery": "3.4.1",
     "ngx-pagination": "^5.0.0",
     "oidc-client": "^1.10.1",
-    "popper.js": "^1.16.0",
+    "popper.js": "^1.16.1",
     "rxjs": "^6.5.4",
     "zone.js": "~0.9.1"
   },
@@ -37,7 +37,7 @@
     "@angular/cli": "8.3.25",
     "@angular/compiler-cli": "8.2.14",
     "@angular/language-service": "8.2.14",
-    "@types/jasmine": "^3.5.0",
+    "@types/jasmine": "^3.5.3",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "~11.10.5",
     "codelyzer": "^5.2.1",
@@ -47,7 +47,7 @@
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-jasmine-html-reporter": "^1.5.2",
     "typescript": "3.5.3"
   },
   "optionalDependencies": {

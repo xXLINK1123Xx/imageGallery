@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Tag} from "../models/tag.model";
+import {Tag} from '../models/tag.model';
 
 @Component({
   selector: 'post-tag',
@@ -9,14 +9,11 @@ import {Tag} from "../models/tag.model";
 export class TagComponent implements OnInit {
 
   @Input()
-  private tag : Tag;
+  public tag: Tag;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewChecked() {
   }
 
 }

@@ -1,4 +1,4 @@
-import {Tag} from "./tag.model";
+import {Tag} from './tag.model';
 
 export class Post {
   public id: number;
@@ -13,13 +13,13 @@ export class Post {
 
   public previewFileUrl: string;
 
-  public fileUrl : string;
+  public fileUrl: string;
 
   public sourceFileUrl: string;
 
   public artist: Tag;
 
-  public copyright :string;
+  public copyright: string;
 
   public characters: Tag[];
 

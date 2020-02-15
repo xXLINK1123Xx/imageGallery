@@ -95,8 +95,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="App_Data" />
-    <Folder Include="App_Data\images" />
     <Folder Include="wwwroot\images" />
   </ItemGroup>
 

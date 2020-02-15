@@ -39,9 +39,9 @@ namespace Web
             });
 
 
-            services.AddSingleton<DanbooruApiWrapper, DanbooruApiWrapper>();
+            services.AddSingleton<DanbooruApiWrapper>();
             services.AddSingleton<IDataProvider<Post>, PostProvider>();
-            services.AddSingleton<ImageStorage>();
+            services.AddSingleton<IImageStorage, ImageStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

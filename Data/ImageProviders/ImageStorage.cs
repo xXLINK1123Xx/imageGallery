@@ -9,7 +9,8 @@ using Infrastructure.Providers;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Data.ImageProviders {
-    public class ImageStorage {
+    public class ImageStorage : IImageStorage
+    {
         private readonly HttpClient _httpClient;
         private readonly IDataProvider<Post> _postProvider;
         private readonly IWebHostEnvironment _env;

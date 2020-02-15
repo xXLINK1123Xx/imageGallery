@@ -1,6 +1,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
-using Data.ImageProviders;
+using Infrastructure.Providers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -8,8 +8,8 @@ namespace Web.Controllers
     [ApiController]
     public class ImagesController : Controller
     {
-        private readonly ImageStorage _imageStorage;
-        public ImagesController(ImageStorage imageStorage)
+        private readonly IImageStorage _imageStorage;
+        public ImagesController(IImageStorage  imageStorage)
         {
             this._imageStorage = imageStorage;
         }

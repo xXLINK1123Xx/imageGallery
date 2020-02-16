@@ -2,6 +2,7 @@ using System.IO;
 using Data.Danbooru;
 using Data.Data;
 using Data.ImageProviders;
+using Data.Services;
 using Infrastructure.Models;
 using Infrastructure.Providers;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using VkNet;
+using VkNet.Enums.Filters;
+using VkNet.Enums.SafetyEnums;
+using VkNet.Model;
 
 namespace Web
 {
@@ -42,6 +47,21 @@ namespace Web
             services.AddSingleton<DanbooruApiWrapper>();
             services.AddSingleton<IDataProvider<Post>, PostProvider>();
             services.AddSingleton<IImageStorage, ImageStorage>();
+            services.AddSingleton((sp) =>
+            {
+                var api = new VkApi();
+                api.Authorize(new ApiAuthParams
+                {
+                    ApplicationId = 7323466,
+                    Login = "+380680069466",
+                    Password = "MyLittleLoli_2014",
+                    GrantType = GrantType.Password,
+                    Settings = Settings.All
+                });
+
+                return api;
+            });
+            services.AddSingleton<VkService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,18 +114,18 @@ namespace Web
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            // app.UseSpa(spa =>
+            // {
+            //     // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //     // see https://go.microsoft.com/fwlink/?linkid=864501
+            //
+            //     spa.Options.SourcePath = "ClientApp";
+            //
+            //     if (env.IsDevelopment())
+            //     {
+            //         spa.UseAngularCliServer(npmScript: "start");
+            //     }
+            // });
         }
     }
 }

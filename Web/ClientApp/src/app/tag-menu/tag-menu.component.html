@@ -4,7 +4,7 @@
     <post-tag *ngFor="let tag of characters" class="tag-menu__tag" [tag]="tag"></post-tag>
   </div>
   <div *ngIf="artist" class="tag-menu__artist">
-    <span class="tag-menu__title">Asrtist</span>
+    <span class="tag-menu__title">Artist</span>
     <post-tag [tag]="artist"></post-tag>
   </div>
   <div *ngIf="tags && tags.length > 0" class="tag-menu__general-tag-list">

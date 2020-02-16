@@ -7,13 +7,12 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import {TagMenuComponent} from "./tag-menu/tag-menu.component";
-import {PostsService} from "./services/images.service";
-import {ImagePreviewComponent} from "./image-preview/image-preview.component";
-import {ImageViewerComponent} from "./image-viewer/image-viewer.component";
-import {TagComponent} from "./tag/tag.component";
-import {NgxPaginationModule} from "ngx-pagination";
+import {TagMenuComponent} from './tag-menu/tag-menu.component';
+import {PostsService} from './services/images.service';
+import {ImagePreviewComponent} from './image-preview/image-preview.component';
+import {ImageViewerComponent} from './image-viewer/image-viewer.component';
+import {TagComponent} from './tag/tag.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavMenuComponent,
     HomeComponent,
     TagMenuComponent,
-    FetchDataComponent,
     ImagePreviewComponent,
     ImageViewerComponent,
     TagComponent
@@ -38,7 +36,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'posts/:page', component: HomeComponent, data: {
         page : 1
         } },
-      { path: 'fetch-data', component: FetchDataComponent },
       {path: 'post-details/:postId', component: ImageViewerComponent },
     ]),
     BrowserAnimationsModule

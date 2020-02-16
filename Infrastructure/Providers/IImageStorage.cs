@@ -8,6 +8,5 @@ namespace Infrastructure.Providers
     {
         Task<string> GetImage(Post post);
         Task<string> SaveImage(Post post);
-        Task<HttpResponseMessage> GetImageResponse(int postId);
     }
 }

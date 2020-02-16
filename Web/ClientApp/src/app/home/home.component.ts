@@ -6,6 +6,7 @@ import {filter, flatMap, take} from 'rxjs/operators';
 import {from} from 'rxjs';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
@@ -13,14 +14,11 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./home.css']
 })
 export class HomeComponent implements OnInit {
-
-  public title = 'Image Gallery';
   public images: Post[];
   public availableTags: Tag[] = [];
   public page = 1;
 
   constructor(private imageService: PostsService,
-              private titleService: Title,
               private route: ActivatedRoute,
               private router: Router,
               @Inject('TOTAL_POST_COUNT') public totalPostCount: string) {}
@@ -28,12 +26,11 @@ export class HomeComponent implements OnInit {
 
   public changePage(newPage: number) {
     this.router.navigate(['../../posts', newPage], {relativeTo: this.route, skipLocationChange: false})
-      .then(res => this.page = newPage);
+     .then(res => this.page = newPage);
   }
 
 
   ngOnInit(): void {
-    this.titleService.setTitle(this.title);
 
     this.route.paramMap.subscribe(params => {
 

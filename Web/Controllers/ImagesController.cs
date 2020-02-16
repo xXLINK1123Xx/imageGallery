@@ -13,10 +13,5 @@ namespace Web.Controllers
         {
             this._imageStorage = imageStorage;
         }
-
-        [HttpGet]
-        [Route("api/images/{id:int}")]
-        public async Task<HttpResponseMessage> GetImage(int id)
-            => await _imageStorage.GetImageResponse(id);
     }
 }

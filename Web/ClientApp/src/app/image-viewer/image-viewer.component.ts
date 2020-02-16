@@ -28,7 +28,7 @@ export class ImageViewerComponent implements OnInit {
           console.error(`no post with id ${this.postId} were found`);
           return;
         }
-        console.log(post);
+
         this.post = post;
         this.setTitle();
       });

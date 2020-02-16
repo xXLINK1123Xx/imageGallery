@@ -14,9 +14,9 @@ namespace Web.Controllers
     {
         private readonly DanbooruApiWrapper _danbooruApiWrapper;
         private readonly IDataProvider<Post> _dataProvider;
-        private readonly ImageStorage _imageProvider;
+        private readonly IImageStorage _imageProvider;
 
-        public PostsController(DanbooruApiWrapper danbooruApiWrapper, IDataProvider<Post> dataProvider, ImageStorage imageStorage)
+        public PostsController(DanbooruApiWrapper danbooruApiWrapper, IDataProvider<Post> dataProvider, IImageStorage imageStorage)
         {
             this._danbooruApiWrapper = danbooruApiWrapper;
             this._dataProvider = dataProvider;

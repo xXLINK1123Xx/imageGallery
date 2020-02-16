@@ -14,6 +14,7 @@ import {ImagePreviewComponent} from "./image-preview/image-preview.component";
 import {ImageViewerComponent} from "./image-viewer/image-viewer.component";
 import {TagComponent} from "./tag/tag.component";
 import {NgxPaginationModule} from "ngx-pagination";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {NgxPaginationModule} from "ngx-pagination";
         } },
       { path: 'fetch-data', component: FetchDataComponent },
       {path: 'post-details/:postId', component: ImageViewerComponent },
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [
     PostsService,

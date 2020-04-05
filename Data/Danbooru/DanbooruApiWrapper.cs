@@ -68,6 +68,7 @@ namespace Data.Danbooru
                 PreviewFileUrl = json.SelectToken("preview_file_url")?.Value<string>(),
                 FileExt = json.SelectToken("file_ext")?.Value<string>(),
                 Artist = new Tag{ Name= json.SelectToken("tag_string_artist")?.Value<string>(), Type = Tag.TagType.Artist},
+                Copyright = new Tag{ Name= json.SelectToken("tag_string_copyright")?.Value<string>(), Type = Tag.TagType.Copyright},
                 Tags = json.SelectToken("tag_string_general")?.Value<string>()
                     .Split(" ")
                     .Select(tag => 

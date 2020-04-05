@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using VkNet;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
@@ -47,21 +48,21 @@ namespace Web
             services.AddSingleton<DanbooruApiWrapper>();
             services.AddSingleton<IDataProvider<Post>, PostProvider>();
             services.AddSingleton<IImageStorage, ImageStorage>();
-            services.AddSingleton((sp) =>
-            {
-                var api = new VkApi();
-                api.Authorize(new ApiAuthParams
-                {
-                    ApplicationId = 7323466,
-                    Login = "+380680069466",
-                    Password = "MyLittleLoli_2014",
-                    GrantType = GrantType.Password,
-                    Settings = Settings.All
-                });
-
-                return api;
-            });
-            services.AddSingleton<VkService>();
+            // services.AddSingleton((sp) =>
+            // {
+            //     var api = new VkApi();
+            //     api.Authorize(new ApiAuthParams
+            //     {
+            //         ApplicationId = 7323466,
+            //         Login = "+380680069466",
+            //         Password = "MyLittleLoli_2014",
+            //         GrantType = GrantType.Password,
+            //         Settings = Settings.All
+            //     });
+            //
+            //     return api;
+            // });
+            // services.AddSingleton<VkService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,7 +78,15 @@ namespace Web
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    const int durationInSeconds = 60 * 60 * 24;
+                    ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+                        "public,max-age=" + durationInSeconds;
+                }
+            });
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
